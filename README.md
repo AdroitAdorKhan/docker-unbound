@@ -1,3 +1,26 @@
+<h2>Custom Setup</h2>
+
+```bash
+git clone https://github.com/AdroitAdorKhan/docker-unbound.git
+cd docker-unbound
+docker buildx bake
+```
+```
+docker tag unbound:local unbound:latest
+```
+```
+mkdir /opt/docker/unbound
+cd /opt/docker/unbound
+wget https://github.com/AdroitAdorKhan/docker-unbound/raw/master/docker-compose.yml
+wget -O root.hints https://www.internic.net/domain/named.root
+docker-compose up -d
+```
+```
+docker exec -it unbound-redis redis-cli dbsize
+docker exec -it unbound-redis redis-cli monitor
+docker exec -it unbound-redis redis-cli INFO | grep ^db
+```
+
 <p align="center"><a href="https://github.com/crazy-max/docker-unbound" target="_blank"><img height="128" src="https://raw.githubusercontent.com/crazy-max/docker-unbound/master/.github/docker-unbound.jpg"></a></p>
 
 <p align="center">
