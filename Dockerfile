@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG UNBOUND_VERSION=1.17.0
+ARG UNBOUND_VERSION=1.17.1
 ARG LDNS_VERSION=1.8.3
 ARG XX_VERSION=1.1.2
 ARG ALPINE_VERSION=3.17
@@ -50,8 +50,7 @@ RUN --mount=type=bind,from=unbound-src,source=/src/unbound,target=.,rw <<EOT
     --with-pthreads \
     --with-libhiredis=$(xx-info sysroot)usr \
     --with-libexpat=$(xx-info sysroot)usr \
-    --with-libevent=$(xx-info sysroot)usr \
-    --with-ssl=$(xx-info sysroot)usr
+    --with-libevent=$(xx-info sysroot)usr
 
   make DESTDIR=/out install
   make DESTDIR=/out unbound-event-install
@@ -124,8 +123,8 @@ RUN mkdir -p /config \
 
 USER unbound
 
-EXPOSE 5053/tcp
-EXPOSE 5053/udp
+EXPOSE 8553/tcp
+EXPOSE 8553/udp
 VOLUME [ "/config" ]
 
 COPY <<-"EOF" /entrypoint.sh
@@ -137,4 +136,4 @@ EOF
 CMD sh /entrypoint.sh
 
 HEALTHCHECK --interval=30s --timeout=10s \
-  CMD drill -p 5053 unbound.net @127.0.0.1
+  CMD drill -p 8553 unbound.net @127.0.0.1
