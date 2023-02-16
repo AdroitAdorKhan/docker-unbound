@@ -10,9 +10,12 @@ docker tag unbound:local unbound:latest
 ```
 ```
 mkdir /opt/docker/unbound
+mkdit /opt/docker/unbound/config
 cd /opt/docker/unbound
 wget https://github.com/AdroitAdorKhan/docker-unbound/raw/master/docker-compose.yml
 wget -O root.hints https://www.internic.net/domain/named.root
+cd config
+wget https://github.com/AdroitAdorKhan/docker-unbound/raw/master/config/forward-zones.conf
 docker-compose up -d
 ```
 ```
