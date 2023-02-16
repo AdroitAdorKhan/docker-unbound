@@ -20,5 +20,6 @@ services:
         published: 8553
         protocol: udp
     volumes:
+      - "./config:/config:ro"
       - "./root.hints:/root.hints"
     restart: always
