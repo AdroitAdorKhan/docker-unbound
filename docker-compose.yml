@@ -10,6 +10,7 @@ services:
   unbound:
     image: unbound:latest
     container_name: unbound
+    network_mode: "host"
     depends_on:
       - redis
     ports:
